@@ -23,14 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import com.example.newsclient.ui.theme.NewsClientTheme
+import com.example.home.items.NewsItem
+import com.example.home.model.NewsItemUiModel
+import com.example.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            NewsClientTheme {
+            AppTheme {
                 NewsClientApp()
             }
         }
@@ -60,10 +62,20 @@ fun NewsClientApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+//            Greeting(
+//                name = "Android",
+//                modifier = Modifier.padding(innerPadding)
+//            )
+            NewsItem(NewsItemUiModel(
+                "https://img.freepik.com/premium-photo/russia-png-flag-waving-sticker-national-symbol-transparent-background_53876-961456.jpg",
+                "Какищ",
+                "Какищ",
+                "Какищ",
+                "Какищ",
+                "Какищ",
+            )) {
+
+            }
         }
     }
 }
@@ -88,7 +100,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    NewsClientTheme {
+    AppTheme {
         Greeting("Android")
     }
 }

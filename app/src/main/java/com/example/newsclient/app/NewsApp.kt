@@ -2,6 +2,7 @@ package com.example.newsclient.app
 
 import android.app.Application
 import com.example.newsclient.di.appModule
+import com.example.newsclient.di.databaseModule
 import com.example.newsclient.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,6 +22,6 @@ class NewsApp : Application() {
     }
 
     private fun buildModuleList() : List<Module> {
-        return networkModule + appModule
+        return networkModule + appModule + databaseModule
     }
 }
