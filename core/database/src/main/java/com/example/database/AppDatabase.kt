@@ -3,7 +3,7 @@ package com.example.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.database.dao.NewsDao
-import com.example.model.NewsEntity
+import com.example.model.entity.NewsEntity
 
 @Database(
     entities = [NewsEntity::class],

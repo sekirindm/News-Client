@@ -39,6 +39,8 @@ android {
 }
 
 dependencies {
+    compileOnly(project(":core:repository-api"))
+    implementation(project(":core:model"))
     implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
@@ -69,4 +71,8 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation(libs.koin.compose)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 }

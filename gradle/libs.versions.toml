@@ -23,7 +23,7 @@ work = "2.9.0"
 ktlint = "12.1.1"
 detekt = "1.23.6"
 koinTest = "4.1.1"
-room = "2.8.4"
+room = "2.6.1"
 firebaseCrashlyticsBuildtools = "3.0.6"
 
 [libraries]
@@ -52,7 +52,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-test = {group = "io.insert-koin", name = "koin-test", version.ref = "koinTest"}
-koin-test-junit4 = {group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koinTest"}
+#koin-test-junit4 = {group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koinTest"}
 
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
@@ -89,3 +89,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
+

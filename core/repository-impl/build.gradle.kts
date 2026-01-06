@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.compileOnly
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -33,10 +35,20 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+    implementation(project(":core:mapper"))
+
+    compileOnly(project(":core:remote-data-source-api"))
+    compileOnly(project(":core:repository-api"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 }

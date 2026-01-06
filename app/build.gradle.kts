@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -16,14 +18,19 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
 
-        val newsApiKey: String =
-            project.properties["NEWS_API_KEY"] as String? ?: ""
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+        }
+
+        val apiKey = properties.getProperty("NEWS_API_KEY") ?: ""
 
         buildConfigField(
             "String",
-            "NEWS_API_KEY",
-            "\"$newsApiKey\""
+            "API_KEY",
+            apiKey
         )
     }
 
@@ -56,9 +63,13 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:database"))
     implementation(project(":core:model"))
-    implementation(project(":core:repository-api"))
+    implementation(project(":core:remote-data-source-api"))
+    implementation(project(":core:remote-data-source-impl"))
+    implementation(project(":core:mapper"))
     implementation(project(":core:repository-impl"))
     implementation(project(":core:ui"))
+
+    implementation(project(":core:repository-api"))
 
     implementation(project(":features:home"))
 

@@ -1,8 +1,11 @@
 package com.example.data.dto
 
+import com.example.data.base.BaseResponse
+import com.example.model.base.Abstract
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class NewsResponse(
     @SerialName("status")
     val status: String,
@@ -10,7 +13,7 @@ data class NewsResponse(
     val totalResults: Int,
     @SerialName("articles")
     val articles: List<ArticleResponse>
-)
+) : BaseResponse()
 
 @Serializable
 data class ArticleResponse(
@@ -21,11 +24,11 @@ data class ArticleResponse(
     val url: String,
     val urlToImage: String? = null,
     val publishedAt: String,
-    val content: String? = null
-)
+    val content: String
+) : Abstract.DataObject
 
 @Serializable
 data class SourceResponse(
     val id: String? = null,
     val name: String
-)
+): Abstract.DataObject

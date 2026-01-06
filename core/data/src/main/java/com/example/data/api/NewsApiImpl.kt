@@ -13,6 +13,7 @@ class NewsApiImpl(
 
     override suspend fun todayNewsRequest(from: String): NewsResponse {
         return client.get("everything") {
+            parameter("q", "news")
             parameter("from", from)
             parameter("apiKey", apiKey)
         }.body()

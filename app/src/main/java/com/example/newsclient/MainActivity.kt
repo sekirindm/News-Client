@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.example.home.HomeScreen
 import com.example.home.items.NewsItem
 import com.example.home.model.NewsItemUiModel
 import com.example.ui.theme.AppTheme
@@ -62,20 +63,7 @@ fun NewsClientApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//            Greeting(
-//                name = "Android",
-//                modifier = Modifier.padding(innerPadding)
-//            )
-            NewsItem(NewsItemUiModel(
-                "https://img.freepik.com/premium-photo/russia-png-flag-waving-sticker-national-symbol-transparent-background_53876-961456.jpg",
-                "Какищ",
-                "Какищ",
-                "Какищ",
-                "Какищ",
-                "Какищ",
-            )) {
-
-            }
+            HomeScreen()
         }
     }
 }
