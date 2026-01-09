@@ -1,9 +1,10 @@
 package com.example.repository_api.home
 
-import com.example.model.base.LocalResult
+import androidx.paging.PagingData
 import com.example.model.entity.NewsEntity
+import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-   suspend fun todayNewsRequest(from: String): LocalResult<List<NewsEntity>>
-   suspend fun getNewsList(): List<NewsEntity>
+   suspend fun todayNewsRequest(from: String): Flow<PagingData<NewsEntity>>
+    suspend fun getNewsList(): List<NewsEntity>
 }

@@ -25,6 +25,7 @@ detekt = "1.23.6"
 koinTest = "4.1.1"
 room = "2.6.1"
 firebaseCrashlyticsBuildtools = "3.0.6"
+credentials = "1.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -73,6 +74,8 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+
+androidx-credentials-domerrors = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
 
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }

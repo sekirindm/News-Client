@@ -11,9 +11,12 @@ class NewsApiImpl(
     private val apiKey: String
 ) : NewsApi {
 
-    override suspend fun todayNewsRequest(from: String): NewsResponse {
+    override suspend fun todayNewsRequest(from: String, page: Int, pageSize: Int): NewsResponse {
         return client.get("everything") {
             parameter("q", "news")
+            parameter("language", "ru")
+            parameter("pageSize", pageSize)
+            parameter("page", page)
             parameter("from", from)
             parameter("apiKey", apiKey)
         }.body()

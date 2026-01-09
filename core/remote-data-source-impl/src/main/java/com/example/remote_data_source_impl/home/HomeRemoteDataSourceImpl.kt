@@ -1,7 +1,6 @@
 package com.example.remote_data_source_impl.home
 
 import com.example.data.api.NewsApi
-import com.example.data.base.BaseResponse
 import com.example.data.base.RequestResult
 import com.example.data.dto.NewsResponse
 import com.example.remote_data_source_api.home.HomeRemoteDataSource
@@ -12,9 +11,9 @@ class HomeRemoteDataSourceImpl(
    private val newsApi: NewsApi
 ) : HomeRemoteDataSource, BaseRemoteDataSource() {
 
-    override suspend fun getTodayNewsList(from: String) : RequestResult<NewsResponse> {
+    override suspend fun getTodayNewsList(from: String, page: Int, pageSize: Int) : RequestResult<NewsResponse> {
         return safeApiCall(Dispatchers.IO) {
-            newsApi.todayNewsRequest(from)
+            newsApi.todayNewsRequest(from, page, pageSize)
         }
     }
 }

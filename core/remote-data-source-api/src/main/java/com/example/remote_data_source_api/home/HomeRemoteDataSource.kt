@@ -5,5 +5,5 @@ import com.example.data.dto.NewsResponse
 
 interface HomeRemoteDataSource {
 
-    suspend fun getTodayNewsList(from: String) : RequestResult<NewsResponse>
+    suspend fun getTodayNewsList(from: String, page: Int, pageSize: Int) : RequestResult<NewsResponse>
 }

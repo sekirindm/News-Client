@@ -1,13 +1,13 @@
 package com.example.repository_impl
 
-import com.example.data.base.RequestResult
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.example.database.dao.NewsDao
 import com.example.mapper.home.NewsListDataToDomainMapper
-import com.example.model.base.LocalResult
-import com.example.model.base.ResponseError
 import com.example.model.entity.NewsEntity
 import com.example.remote_data_source_api.home.HomeRemoteDataSource
 import com.example.repository_api.home.HomeRepository
+import com.example.repository_impl.paging.NewsPagingSource
 
 class HomeRepositoryImpl(
     private val remoteDataSource: HomeRemoteDataSource,
@@ -15,16 +15,21 @@ class HomeRepositoryImpl(
     private val dao: NewsDao,
 ) : HomeRepository {
 
-    override suspend fun todayNewsRequest(from: String) =
-        when (val response = remoteDataSource.getTodayNewsList(from)) {
-            is RequestResult.Success -> {
-                val output = mapper.map(response.data.articles)
-                dao.insertAll(output)
-                LocalResult.Success(output)
+    override suspend fun todayNewsRequest(from: String) = Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                initialLoadSize = 10 ,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                NewsPagingSource(
+                    from = from,
+                    remoteDataSource = remoteDataSource,
+                    mapper = mapper,
+                    dao = dao
+                )
             }
-            is RequestResult.Warning -> LocalResult.Error(ResponseError(response.info))
-            is RequestResult.Error -> LocalResult.Error(response.throwable as Exception)
-        }
+        ).flow
 
     override suspend fun getNewsList(): List<NewsEntity> {
         return dao.getNewsList()
