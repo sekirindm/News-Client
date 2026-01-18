@@ -68,6 +68,7 @@ dependencies {
     implementation(project(":core:mapper"))
     implementation(project(":core:repository-impl"))
     implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
 
     implementation(project(":core:repository-api"))
 

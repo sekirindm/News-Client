@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/core/repository-api" />
             <option value="$PROJECT_DIR$/core/repository-impl" />
             <option value="$PROJECT_DIR$/core/ui" />
+            <option value="$PROJECT_DIR$/core/utils" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/home" />
           </set>

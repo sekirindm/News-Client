@@ -11,10 +11,26 @@ class NewsApiImpl(
     private val apiKey: String
 ) : NewsApi {
 
-    override suspend fun todayNewsRequest(from: String, page: Int, pageSize: Int): NewsResponse {
+    override suspend fun popularityNewsRequest(page: Int, pageSize: Int): NewsResponse {
         return client.get("everything") {
             parameter("q", "news")
             parameter("language", "ru")
+            parameter("sortedBy", "popularity")
+            parameter("pageSize", pageSize)
+            parameter("page", page)
+            parameter("apiKey", apiKey)
+        }.body()
+    }
+
+    override suspend fun latestNewsRequest(
+        from: String,
+        page: Int,
+        pageSize: Int
+    ): NewsResponse {
+        return client.get("everything") {
+            parameter("q", "news")
+            parameter("language", "ru")
+            parameter("sortedBy", "publishedAt")
             parameter("pageSize", pageSize)
             parameter("page", page)
             parameter("from", from)

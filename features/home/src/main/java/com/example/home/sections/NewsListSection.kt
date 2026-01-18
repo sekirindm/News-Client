@@ -41,5 +41,4 @@ fun NewsListSection(
             Spacer(Modifier.padding(spacer.space10))
         }
     }
-
 }

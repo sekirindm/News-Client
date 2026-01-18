@@ -14,5 +14,6 @@ data class NewsEntity(
     val sourceName: String,
     val imageUrl: String?,
     val publishedAt: String,
-    val isRead: Boolean = false
+    val isRead: Boolean = false,
+    val type: String,
 ) : Abstract.DomainObject

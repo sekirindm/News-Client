@@ -4,8 +4,10 @@ import android.os.Bundle
 import com.example.data.dto.ArticleResponse
 import com.example.model.base.Abstract
 import com.example.model.entity.NewsEntity
+import com.example.utils.BusinessConstants
 
-class NewsListDataToDomainMapper : Abstract.Mapper.DataToDomain<ArticleResponse, NewsEntity> {
+class NewsCarouselListDataToDomainMapper :
+    Abstract.Mapper.DataToDomain<ArticleResponse, NewsEntity> {
     override fun map(
         data: ArticleResponse,
         arg: Bundle
@@ -16,5 +18,6 @@ class NewsListDataToDomainMapper : Abstract.Mapper.DataToDomain<ArticleResponse,
         sourceName = data.source.name,
         imageUrl = data.urlToImage,
         publishedAt = data.publishedAt,
+        type = BusinessConstants.NEWS_TYPE_CAROUSEL
     )
 }

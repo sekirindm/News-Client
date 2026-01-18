@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:model"))
     implementation(project(":core:mapper"))
+    implementation(project(":core:utils"))
 
     compileOnly(project(":core:remote-data-source-api"))
     compileOnly(project(":core:repository-api"))

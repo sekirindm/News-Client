@@ -9,8 +9,8 @@ import com.example.model.entity.NewsEntity
 @Dao
 interface NewsDao {
 
-    @Query("SELECT * FROM news ORDER BY publishedAt DESC")
-    suspend fun getNewsList(): List<NewsEntity>
+    @Query("SELECT * FROM news WHERE type = :type")
+    suspend fun getNewsList(type: String): List<NewsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<NewsEntity>)

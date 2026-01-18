@@ -12,6 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.home.model.CarouselItemUiModel
+import com.example.home.sections.CarouselSection
 import com.example.home.sections.NewsListSection
 import com.example.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
@@ -22,12 +24,17 @@ fun HomeScreen(model: HomeViewModel = koinViewModel()) {
     LaunchedEffect(Unit) {
         model.dispatch(HomeViewModel.NewsViewAction.LoadNewsList)
     }
+    LaunchedEffect(Unit) {
+        model.dispatch(HomeViewModel.NewsViewAction.LoadCarousel)
+    }
 
     val state by model.state.collectAsStateWithLifecycle()
-    val items = state.items?.collectAsLazyPagingItems()?: return
+    val newsItems = state.newsItems.collectAsLazyPagingItems()
+    val carouselItems = state.carouselItems.collectAsLazyPagingItems()
 
-    Column(modifier = Modifier.height(250.dp).padding(top = 16.dp, start = 10.dp, end = 10.dp)) {
-        NewsListSection(listNews = items, onItemClick = { id ->
+    Column(modifier = Modifier.padding(top = 16.dp, start = 10.dp, end = 10.dp)) {
+        CarouselSection(carouselItems)
+        NewsListSection(listNews = newsItems, onItemClick = { id ->
         })
     }
 }

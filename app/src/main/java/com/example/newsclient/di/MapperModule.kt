@@ -1,11 +1,15 @@
 package com.example.newsclient.di
 
-import com.example.mapper.home.NewsListDataToDomainMapper
+import com.example.mapper.home.NewsCarouselListDataToDomainMapper
+import com.example.mapper.home.NewsMainListDataToDomainMapper
 import org.koin.dsl.module
 
 val mapperModule = module {
 
     single {
-        NewsListDataToDomainMapper()
+        NewsMainListDataToDomainMapper()
+    }
+    single {
+    NewsCarouselListDataToDomainMapper()
     }
 }

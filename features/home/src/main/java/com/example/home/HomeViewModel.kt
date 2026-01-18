@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.example.home.model.CarouselItemUiModel
 import com.example.home.model.NewsItemUiModel
 import com.example.repository_api.home.HomeRepository
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,13 +29,15 @@ class HomeViewModel(application: Application, private val homeRepository: HomeRe
     }
 
     sealed interface NewsViewAction {
-        object LoadNewsList  : NewsViewAction
+        object LoadNewsList : NewsViewAction
+        object LoadCarousel : NewsViewAction
         data class OnClick(val id: Long) : NewsViewAction
     }
 
     data class NewsViewState(
+        val newsItems: Flow<PagingData<NewsItemUiModel>> = flowOf(PagingData.empty()),
+        val carouselItems: Flow<PagingData<CarouselItemUiModel>> = flowOf(PagingData.empty()),
         val loading: Boolean = false,
-        val items: Flow<PagingData<NewsItemUiModel>>? = null,
         val error: String? = null
     )
 
@@ -46,13 +50,14 @@ class HomeViewModel(application: Application, private val homeRepository: HomeRe
     fun dispatch(action: NewsViewAction) {
         when(action) {
             is NewsViewAction.LoadNewsList -> getNewsList()
+            is NewsViewAction.LoadCarousel -> getNewsCarouselList()
             is NewsViewAction.OnClick -> onItemClick(action.id)
         }
     }
 
    fun getNewsList() {
        viewModelScope.launch {
-           val pagingFlow = homeRepository.todayNewsRequest(LocalDate.now().minusDays(1).toString())
+           val pagingFlow = homeRepository.popularityNewsRequest()
                    .map { pagingData ->
                        pagingData.map { entity ->
                            NewsItemUiModel(
@@ -66,8 +71,27 @@ class HomeViewModel(application: Application, private val homeRepository: HomeRe
                            )
                        }
                    }.cachedIn(viewModelScope)
+           _state.update { it.copy(newsItems = pagingFlow) }
+       }
+   }
 
-           _state.update { it.copy(items = pagingFlow) }
+   fun getNewsCarouselList() {
+       viewModelScope.launch {
+           val pagingFlow = homeRepository.latestNewsRequest(LocalDate.now().minusDays(1).toString())
+                   .map { pagingData ->
+                       pagingData.map { entity ->
+                           CarouselItemUiModel(
+                               id = entity.id,
+                               imageUrl = entity.imageUrl,
+                               sourceName = entity.sourceName,
+                               authorName = entity.author,
+                               title = entity.title,
+                               content = entity.content,
+                               date = entity.publishedAt
+                           )
+                       }
+                   }.cachedIn(viewModelScope)
+           _state.update { it.copy(carouselItems = pagingFlow) }
        }
    }
 

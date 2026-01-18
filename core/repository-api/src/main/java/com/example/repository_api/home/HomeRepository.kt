@@ -5,6 +5,7 @@ import com.example.model.entity.NewsEntity
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-   suspend fun todayNewsRequest(from: String): Flow<PagingData<NewsEntity>>
-    suspend fun getNewsList(): List<NewsEntity>
+   suspend fun latestNewsRequest(from: String): Flow<PagingData<NewsEntity>>
+   suspend fun popularityNewsRequest(): Flow<PagingData<NewsEntity>>
+   suspend fun getNewsList(type: String): List<NewsEntity>
 }

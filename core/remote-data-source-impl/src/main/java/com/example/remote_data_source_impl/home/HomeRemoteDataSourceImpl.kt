@@ -11,9 +11,22 @@ class HomeRemoteDataSourceImpl(
    private val newsApi: NewsApi
 ) : HomeRemoteDataSource, BaseRemoteDataSource() {
 
-    override suspend fun getTodayNewsList(from: String, page: Int, pageSize: Int) : RequestResult<NewsResponse> {
+    override suspend fun popularityNewsRequest(
+        page: Int,
+        pageSize: Int
+    ): RequestResult<NewsResponse> {
         return safeApiCall(Dispatchers.IO) {
-            newsApi.todayNewsRequest(from, page, pageSize)
+            newsApi.popularityNewsRequest(page, pageSize)
+        }
+    }
+
+    override suspend fun latestNewsRequest(
+        from: String,
+        page: Int,
+        pageSize: Int
+    ): RequestResult<NewsResponse> {
+        return safeApiCall(Dispatchers.IO) {
+            newsApi.latestNewsRequest(from, page, pageSize)
         }
     }
 }

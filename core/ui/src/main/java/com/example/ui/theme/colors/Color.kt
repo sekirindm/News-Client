@@ -8,8 +8,7 @@ import androidx.compose.ui.graphics.Color
  * Provides custom color variants that are not in the Material Theme.
  */
 object AppColorSchema {
-    val accentColor = Color(0xFF2ABA90)
-    val red = Color(0xFFEF2F2F)
+    val accentColor = Color(0xFFFF2D55)
     val darkGray = Color(0xFF353434)
     val acceptColor = Color(0xFF0FA939)
 
